@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
 import { Radio } from 'antd';
+import { connect } from 'dva';
 
+@connect(state => {
+  return {
+    filter: state['task'].filter,
+  };
+})
 class Filter extends Component {
-  state = {};
   render() {
+    const { dispatch, filter } = this.props;
     return (
       <div>
         <Radio.Group
-          onChange={() => {
-            console.info('hello');
+          onChange={e => {
+            dispatch({ type: 'task/filter', payload: e.target.value });
           }}
+          defaultValue={filter}
         >
-          <Radio.Button value="large">Large</Radio.Button>
-          <Radio.Button value="default">Default</Radio.Button>
-          <Radio.Button value="small">Small</Radio.Button>
+          <Radio.Button value="todo">todo</Radio.Button>
+          <Radio.Button value="completed">completed</Radio.Button>
+          <Radio.Button value="all">all</Radio.Button>
         </Radio.Group>
       </div>
     );
