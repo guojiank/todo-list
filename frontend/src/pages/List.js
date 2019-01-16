@@ -23,9 +23,7 @@ const filter = state => {
 
 const mapStateToProps = state => {
   const tmpTask = state['task'];
-
   const localTask = filter(tmpTask);
-
   return {
     data: localTask.data,
   };
@@ -33,6 +31,13 @@ const mapStateToProps = state => {
 
 @connect(mapStateToProps)
 class ListComponent extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'task/getTasks',
+    });
+  }
+
   render() {
     const { data, dispatch } = this.props;
     return (
@@ -49,8 +54,8 @@ class ListComponent extends Component {
                       type="check"
                       onClick={() => {
                         dispatch({
-                          type: 'task/trigger',
-                          payload: item,
+                          type: 'task/checkTask',
+                          payload: item.id,
                         });
                       }}
                     />
@@ -61,8 +66,8 @@ class ListComponent extends Component {
                       type="close"
                       onClick={() => {
                         dispatch({
-                          type: 'task/trigger',
-                          payload: item,
+                          type: 'task/closeTask',
+                          payload: item.id,
                         });
                       }}
                     />
@@ -73,8 +78,8 @@ class ListComponent extends Component {
                 title="Are you sure delete this task?"
                 onConfirm={() => {
                   dispatch({
-                    type: 'task/delete',
-                    payload: item.key,
+                    type: 'task/deleteTask',
+                    payload: item.id,
                   });
                 }}
                 okText="Yes"
@@ -85,7 +90,7 @@ class ListComponent extends Component {
                 </Tooltip>
               </Popconfirm>,
             ]}
-            key={item.key}
+            key={item.id}
           >
             {item.completed === true ? <del>{item.text}</del> : item.text}
           </List.Item>

@@ -18,9 +18,9 @@ class Filter extends Component {
           }}
           defaultValue={filter}
         >
-          <Radio.Button value="todo">todo</Radio.Button>
-          <Radio.Button value="completed">completed</Radio.Button>
-          <Radio.Button value="all">all</Radio.Button>
+          <Radio.Button value="todo">未完成</Radio.Button>
+          <Radio.Button value="completed">已完成</Radio.Button>
+          <Radio.Button value="all">全部</Radio.Button>
         </Radio.Group>
       </div>
     );

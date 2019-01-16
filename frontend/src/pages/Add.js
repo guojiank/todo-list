@@ -20,7 +20,7 @@ class Add extends Component {
         <Button
           onClick={() => {
             dispatch({
-              type: 'task/add',
+              type: 'task/addTask',
               payload: this.state.text,
             });
             this.setState({ text: '' });

@@ -1,6 +1,6 @@
 import styles from './index.css';
-import React, { Component } from 'react';
-import { Icon, Button } from 'antd';
+import React from 'react';
+import { Icon } from 'antd';
 
 const Login = () => {
   return (
@@ -22,8 +22,10 @@ function BasicLayout(props) {
           paddingRight: '6em',
         }}
       >
-        <Login />
+        {/* <Login /> */}
       </div>
+      <br />
+
       {props.children}
     </div>
   );
